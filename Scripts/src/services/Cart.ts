@@ -11,12 +11,14 @@ class AjaxCart {
         try{
             const req = await fetch('/cart/add.js', {
                 method: 'POST',
-                headers: {'ContentType': 'application/json'},
-                body: JSON.stringify({id: variantData.id, quantity: variantData.quantity})
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ id: variantData.id, quantity: variantData.quantity })
             })
-            const res: Item = await req.json()
+            const res = await req.json()
+            return res
         }catch(err){
-            return err;
+            console.log(err)
+            return err
         }
     }
 }

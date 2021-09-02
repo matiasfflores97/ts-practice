@@ -96,3 +96,12 @@ export interface ItemToCart {
     id: number;
     quantity: number;
 }
+
+export interface ProductFormElements extends HTMLFormControlsCollection {
+    id: HTMLInputElement;
+    quantity: HTMLInputElement;
+}
+
+export interface ProductForm extends HTMLFormElement {
+    elements: ProductFormElements
+}
