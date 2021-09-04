@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="{{ 'component-cart.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-cart.css' | asset_url | stylesheet_tag }}</noscript>
+
+<div id="CartDrawer" class="drawer drawer--right">
+    <div class="drawer__header">
+        <div class="drawer__header--fixed">
+            <h2 class="drawer__title">Mi carrito</h2>
+            <div class="drawer__close">
+                <button type="button" class="drawer__close-button js-drawer-close">
+                    <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="CartContainer">
+        <div class="drawer__scrollable">
+            {% for item in cart.items %}
+                <div class="ajaxcart-product">
+                    <div class="ajaxcart-product__image">
+                        <img src="{{ item.image | img_url: '200x150'}}" alt="{{ item.image.alt }}">
+                    </div>
+                    <div class="ajaxcart-product__meta">
+                        <h4>{{ item.product.title }}</h4>
+                        <span>{{ item.variant.title }}</span>
+                        <span>{{ item.original_line_price | money_with_currency }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

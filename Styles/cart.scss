@@ -1,0 +1,83 @@
+.drawer{
+    position: fixed;
+    transform: translateX(100%);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 100;
+    right: 0;
+    top: 0;
+    width: calc(30vw);
+    height: 100%;
+    padding: 0;
+    background-color: #fff;
+    box-shadow: -1px 0px 10px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow: -1px 0px 10px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: -1px 0px 10px 0px rgba(0,0,0,0.15);
+    overflow-x: hidden;
+    transition: transform 200ms ease,
+    visibility 200ms ease,
+    opacity 200ms ease;
+    &.drawer--opening{
+        transform: translateX(0);
+        visibility: visible;
+        opacity: 1;
+    }
+    .drawer__header{
+        padding-left: 30px;
+        padding-right: 30px;
+        .drawer__header--fixed{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 10px 0px;
+            border-bottom: 1px solid;
+            border-bottom-color: #e8e8e1;
+            .drawer__close{
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+            }
+            .drawer__close-button{
+                background: 0 0;
+                border: none;
+                display: inline-block;
+                cursor: pointer;
+            }
+            .drawer__close-button svg{
+                height: 28px;
+                width: 28px;
+                display: inline-block;
+                vertical-align: middle;
+                path{
+                    stroke: black;
+                }
+            }
+        }
+    }
+    #CartContainer{
+       .ajaxcart-product{
+            display: flex;
+            align-items: flex-start;
+            margin: 10px 0px;
+            .ajaxcart-product__image{
+                flex-basis: 40%;
+                display: flex;
+                justify-content: center;
+            }
+            .ajaxcart-product__meta{
+                flex-basis: 60%;
+                h4{
+                    margin: 0;
+                    letter-spacing: 0.06rem;
+                    line-height: 1.8;
+                }
+                span{
+                    display: block;
+                }
+            }
+       } 
+    }
+}
+

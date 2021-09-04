@@ -1,7 +1,7 @@
 export interface ICart {
     token:                            string;
     note:                             null;
-    attributes:                       Attributes;
+    attributes:                       Object;
     original_total_price:             number;
     total_price:                      number;
     total_discount:                   number;
@@ -12,9 +12,6 @@ export interface ICart {
     currency:                         string;
     items_subtotal_price:             number;
     cart_level_discount_applications: any[];
-}
-
-export interface Attributes {
 }
 
 export interface Item {
