@@ -1,20 +1,24 @@
 import { ICart, Item, ItemToCart } from '../interfaces/ICart'
 
 class AjaxCart {
-    public ajaxCartDrawer: HTMLDivElement
-    public quantityInput: NodeListOf<HTMLInputElement>
+    public body: HTMLBodyElement | null = null
+    public ajaxCartDrawer: HTMLDivElement | null = null
+    public ajaxCartDrawerItems: HTMLDivElement | null = null
 
     constructor(){
-        this.ajaxCartDrawer = document.querySelector('#CartDrawer') as HTMLDivElement
-        this.quantityInput  = document.querySelectorAll('.product__quantity')
+        this.body                   = document.querySelector('body') as HTMLBodyElement
+        this.ajaxCartDrawer         = document.querySelector('#CartDrawer') as HTMLDivElement
+        this.ajaxCartDrawerItems    = document.querySelector('#CartContainer .drawer__scrollable') as HTMLDivElement
     }
 
     public openDrawer(){
-        this.ajaxCartDrawer.classList.add('drawer--opening')
+        this.ajaxCartDrawer!.classList.add('drawer--opening')
+        this.body!.classList.add('js-drawer-open');
     }
 
     public closeDrawer(){
-        this.ajaxCartDrawer.classList.remove('drawer--opening')
+        this.ajaxCartDrawer!.classList.remove('drawer--opening');
+        this.body!.classList.remove('js-drawer-open');
     }
 
     public async addItem(variantData: ItemToCart): Promise<Item>{
@@ -36,6 +40,21 @@ class AjaxCart {
         try{
             const req = await fetch('/cart.js')
             const res: ICart = await req.json()
+            const html = res.items.map(item => 
+                `<div class="ajaxcart-product">
+                    <div class="ajaxcart-product__image">
+                        <img src="${item.featured_image.url}" alt="${item.featured_image.alt}">
+                    </div>
+                    <div class="ajaxcart-product__meta">
+                        <h4>${item.title}</h4>
+                        <span>${Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.original_price)}</span>
+                    </div>
+                 </div>
+                `
+            ).join('')
+
+            this.ajaxCartDrawerItems!.innerHTML = html
+
             return res;
         }catch(err: any){
             return err
@@ -43,7 +62,7 @@ class AjaxCart {
     }
 
     public async buildCart(): Promise<void>{
-        const cart = await this.getCart()
+        await this.getCart()
         this.openDrawer()
     }
 }
