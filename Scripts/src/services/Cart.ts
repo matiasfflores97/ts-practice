@@ -31,8 +31,23 @@ class AjaxCart {
             const res = await req.json()
             this.buildCart()
             return res
-        }catch(err: any){
-            return err
+        }catch(err){
+            throw err
+        }
+    }
+
+    public async modifyItem(variantData: ItemToCart): Promise<ICart>{
+        try{
+           const req = await fetch('/cart/change.js', {
+               method: 'POST',
+               headers: {'Content-Type': 'application/json'},
+               body: JSON.stringify({id: (variantData.id).toString(), quantity: variantData.quantity})
+           })
+           const res = await req.json()
+           this.buildCart()
+           return res 
+        }catch(err){
+            throw err
         }
     }
 
@@ -42,6 +57,7 @@ class AjaxCart {
             const res: ICart = await req.json()
             const html = res.items.map(item => 
                 `<div class="ajaxcart-product">
+                    <button class="ajaxcart-product__remove" data-id="${item.id}">X</button>
                     <div class="ajaxcart-product__image">
                         <img src="${item.featured_image.url}" alt="${item.featured_image.alt}">
                     </div>
@@ -56,8 +72,8 @@ class AjaxCart {
             this.ajaxCartDrawerItems!.innerHTML = html
 
             return res;
-        }catch(err: any){
-            return err
+        }catch(err){
+            throw 'Error'
         }
     }
 

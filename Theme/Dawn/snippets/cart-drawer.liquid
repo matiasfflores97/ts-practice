@@ -16,6 +16,7 @@
         <div class="drawer__scrollable">
             {% for item in cart.items %}
                 <div class="ajaxcart-product">
+                    <button class="ajaxcart-product__remove" data-id="{{item.id}}">X</button>
                     <div class="ajaxcart-product__image">
                         <img src="{{ item.image | img_url: '200x150'}}" alt="{{ item.image.alt }}">
                     </div>

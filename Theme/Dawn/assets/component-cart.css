@@ -50,7 +50,17 @@
   .drawer #CartContainer .ajaxcart-product {
     display: flex;
     align-items: flex-start;
+    position: relative;
+    width: 90%;
     margin: 10px 0px; }
+    .drawer #CartContainer .ajaxcart-product .ajaxcart-product__remove {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 5px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer; }
     .drawer #CartContainer .ajaxcart-product .ajaxcart-product__image {
       flex-basis: 40%;
       display: flex;

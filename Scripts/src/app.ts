@@ -3,6 +3,7 @@ import { ProductForm } from './interfaces/ICart'
 
 document.addEventListener('DOMContentLoaded', () => {
     const [...btnAddToCart] = document.querySelectorAll<HTMLButtonElement>('button.add-to-cart');
+    const [...btnRemoveToCart] = document.querySelectorAll<HTMLButtonElement>('.ajaxcart-product__remove');
     const btnOpenCart = document.querySelector('.header__icon--cart') as HTMLAnchorElement;
     const btnCloseCart = document.querySelector('.drawer__close-button') as HTMLButtonElement;
 
@@ -16,6 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
             target.classList.add('loading')
             await AjaxCart.addItem({id, quantity})
             target.classList.remove('loading')
+        })
+    })
+
+    btnRemoveToCart.forEach( btn => {
+        btn.addEventListener('click', async (event: Event) => {
+            event.preventDefault()
+            const target = event.target as HTMLButtonElement
+            const id = Number(target.dataset.id)
+            const quantity = 0
+            await AjaxCart.modifyItem({id, quantity})
         })
     })
     
